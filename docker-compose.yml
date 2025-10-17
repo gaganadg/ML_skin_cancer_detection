@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:6
+    container_name: skin-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database/data:/data/db
+
+  ml_service:
+    build: ./ml_service
+    container_name: ml-service
+    ports:
+      - "8001:8001"
+
+  backend:
+    build: ./backend
+    container_name: backend
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/skin_cancer
+      - ML_URL=http://ml_service:8001
+      - PORT=8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+      - ml_service
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    environment:
+      - VITE_BACKEND_URL=http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+
