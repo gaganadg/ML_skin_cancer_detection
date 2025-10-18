@@ -65,3 +65,10 @@ Example (Windows PowerShell):
 
 ### Sample testing
 - After training and starting all services, upload a lesion photo in the UI and optionally provide symptoms; the backend forwards the image and symptom JSON to the ML service, which fuses both into the final prediction.
+
+- ## 👩‍💻 Contributors
+
+- @gaganadg  
+- @hasini627
+- @KrupaliPrashanth
+- @manasa309
